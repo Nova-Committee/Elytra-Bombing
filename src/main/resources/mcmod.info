@@ -1,0 +1,16 @@
+[
+  {
+    "modid": "ebb",
+    "name": "Elytra Bombing",
+    "description": "",
+    "version": "${version}",
+    "mcversion": "${mcversion}",
+    "url": "",
+    "updateUrl": "",
+    "authorList": ["Tapio"],
+    "credits": "",
+    "logoFile": "",
+    "screenshots": [],
+    "dependencies": []
+  }
+]
