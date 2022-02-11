@@ -1,0 +1,5 @@
+name: ElytraBombing
+main: committee.nova.plr.elytraBombing.ElytraBombing
+version: "1.0.0"
+author: Tapio
+api-version: 1.13
