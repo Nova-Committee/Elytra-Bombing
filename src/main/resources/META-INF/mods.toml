@@ -1,0 +1,10 @@
+modLoader = "javafml"
+loaderVersion = "[29,)"
+[[mods]]
+modId = "ebb"
+version = "1.15.2-1.0.0"
+displayName = "Elytra Bombing"
+credits = ""
+authors = "Tapio"
+description = '''
+'''
