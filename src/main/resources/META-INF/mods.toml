@@ -1,0 +1,12 @@
+modLoader = "javafml"
+loaderVersion = "[32,)"
+license = "AGPL v3"
+[[mods]]
+modId = "ebb"
+version = "1.16.5-1.0.0"
+displayName = "Elytra Bombing"
+#logoFile="logo.png"
+credits = ""
+authors = "Tapio"
+description = '''
+'''
