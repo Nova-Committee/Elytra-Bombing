@@ -1,0 +1,10 @@
+{
+    "id": "ebb",
+    "name": "Elytra Bombing",
+    "authors": [
+        "Tapio"
+    ],
+    "listeners": [
+        "committee.nova.plr.elytraBombing.ElytraBombing"
+    ]
+}

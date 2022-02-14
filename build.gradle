@@ -1,0 +1,48 @@
+buildscript {
+	repositories {
+		mavenCentral()
+		maven { url 'https://www.jitpack.io' }
+		maven { url 'https://files.minecraftforge.net/maven' }
+		maven {url 'https://repo.spongepowered.org/maven'}
+	}
+	dependencies {
+		//Change jitpack to moderniser when Forge uploads 1.13.2 MCPConfig
+		classpath "org.spongepowered:mixingradle:0.6-SNAPSHOT"
+		classpath 'com.github.unascribed:RiftGradle:73e7b0a'
+	}
+}
+
+
+apply plugin: 'net.minecraftforge.gradle.tweaker-client'
+apply plugin: 'java'
+
+group 'committee.nova.plr.ebb'
+version '1.13-1.0.0'
+archivesBaseName = 'ElytraBombing-Rift'
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+repositories {
+	mavenCentral()
+	maven { url 'https://repo.unascribed.com' }
+	maven { url 'https://jitpack.io' }
+}
+
+dependencies {
+	implementation 'com.github.unascribed:Rift:FINAL'
+}
+
+minecraft {
+	version = '1.13.2'
+	mappings = 'snapshot_20181106'
+	runDir = 'run'
+	tweakClass = 'org.dimdev.riftloader.launch.RiftLoaderClientTweaker'
+}
+
+apply plugin: "org.spongepowered.mixin"
+
+mixin {
+	defaultObfuscationEnv notch
+	add sourceSets.main, "mixins.ebb.refmap.json"
+}

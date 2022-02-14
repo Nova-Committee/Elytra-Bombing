@@ -1,0 +1,14 @@
+{
+  "required": true,
+  "minVersion": "0.7.7",
+  "compatibilityLevel": "JAVA_8",
+  "target": "@env(DEFAULT)",
+  "package": "committee.nova.plr.elytraBombing.mixin",
+  "refmap": "mixins.ebb.refmap.json",
+  "mixins": [
+    "MixinItem"
+  ],
+  "client": [],
+  "server": [],
+  "verbose": true
+}
