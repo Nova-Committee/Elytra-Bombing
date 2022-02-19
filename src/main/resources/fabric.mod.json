@@ -1,0 +1,25 @@
+{
+  "schemaVersion": 1,
+  "id": "ebb",
+  "version": "${version}",
+  "name": "Elytra Bombing",
+  "description": "",
+  "authors": [
+    "Tapio"
+  ],
+  "contact": {
+    "repo": "https://github.com/Nova-Committee/Elytra-Bombing"
+  },
+  "license": "AGPL v3",
+  "environment": "*",
+  "entrypoints": {
+    "main": [
+      "committee.nova.plr.ebb.ElytraBombing"
+    ]
+  },
+  "depends": {
+    "fabricloader": ">=0.12.12",
+    "fabric": "*",
+    "minecraft": "*"
+  }
+}
