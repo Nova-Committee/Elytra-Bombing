@@ -1,0 +1,29 @@
+{
+	"schema_version": 1,
+	"quilt_loader": {
+		"group": "committee.nova",
+		"id": "ebb",
+		"version": "${version}",
+		"metadata": {
+			"name": "ElytraBombing",
+			"description": "Bomb them down!",
+			"contributors": {
+				"Tapio": "Owner"
+			}
+		},
+		"intermediate_mappings": "net.fabricmc:intermediary",
+		"entrypoints": {
+			"init": "committee.nova.ebb.ElytraBombing"
+		},
+		"depends": [
+			{
+				"id": "quilt_loader",
+				"versions": ">=0.16.0-"
+			},
+			{
+				"id": "minecraft",
+				"versions": ">=1.18.2"
+			}
+		]
+	}
+}
