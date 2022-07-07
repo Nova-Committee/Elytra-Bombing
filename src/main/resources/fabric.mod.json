@@ -1,0 +1,23 @@
+{
+  "schemaVersion": 1,
+  "id": "ebb",
+  "version": "${version}",
+  "name": "Elytra Bombing",
+  "description": "",
+  "authors": [
+    "Tapio"
+  ],
+  "contact": {},
+  "license": "AGPL-3.0",
+  "environment": "*",
+  "entrypoints": {
+    "main": [
+      "committee.nova.plr.ebb.ElytraBombing"
+    ]
+  },
+  "depends": {
+    "fabricloader": ">=0.14.8",
+    "fabric": "*",
+    "minecraft": "1.19"
+  }
+}
