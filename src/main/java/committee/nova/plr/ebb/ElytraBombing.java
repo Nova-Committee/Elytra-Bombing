@@ -3,6 +3,7 @@ package committee.nova.plr.ebb;
 import com.google.inject.Inject;
 import committee.nova.plr.ebb.util.Utilities;
 import org.apache.logging.log4j.Logger;
+import org.spongepowered.api.data.type.HandTypes;
 import org.spongepowered.api.entity.EntityTypes;
 import org.spongepowered.api.entity.explosive.fused.PrimedTNT;
 import org.spongepowered.api.entity.living.player.Player;
@@ -14,6 +15,7 @@ import org.spongepowered.api.event.lifecycle.ConstructPluginEvent;
 import org.spongepowered.api.item.ItemType;
 import org.spongepowered.api.item.ItemTypes;
 import org.spongepowered.api.item.inventory.Inventory;
+import org.spongepowered.api.item.inventory.ItemStack;
 import org.spongepowered.api.item.inventory.ItemStackSnapshot;
 import org.spongepowered.api.util.Tuple;
 import org.spongepowered.api.world.World;
@@ -44,12 +46,18 @@ public class ElytraBombing {
         if (!player.elytraFlying().get()) return;
         final ItemStackSnapshot stack = event.itemStack();
         final ItemType type = stack.createStack().type();
+        if (type != player.itemInHand(HandTypes.MAIN_HAND).type()) return;
         final Tuple<ItemType, ItemType> bombingItems = Tuple.of(ItemTypes.FIRE_CHARGE.get(), ItemTypes.FLINT_AND_STEEL.get());
         if (!type.isAnyOf(bombingItems.first(), bombingItems.second())) return;
         final Inventory inv = player.inventory();
         final ItemType tnt = ItemTypes.TNT.get();
         if (!inv.contains(tnt)) return;
         if (Utilities.consumeStackByType(inv, tnt, 1) != 1) return;
+        if (type == bombingItems.first()) {
+            final ItemStack newStack = stack.createStack();
+            newStack.setQuantity(newStack.quantity() - 1);
+            player.setItemInHand(HandTypes.MAIN_HAND, newStack);
+        }
         final World<?, ?> world = player.world();
         final PrimedTNT tntEntity = world.createEntity(EntityTypes.TNT, player.position().add(0F, .5F, 0F));
         tntEntity.velocity().set(player.velocity().get());
