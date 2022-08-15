@@ -1,0 +1,33 @@
+{
+  "loader": {
+    "name": "java_plain",
+    "version": "1.0"
+  },
+  "license": "GNU AGPL 3.0",
+  "plugins": [
+    {
+      "id": "ebb",
+      "name": "ElytraBombing",
+      "version": "${version}",
+      "entrypoint": "committee.nova.plr.ebb.ElytraBombing",
+      "description": "Fly with elytra and bomb TNTs to the ground!",
+      "branding": {},
+      "links": {
+      },
+      "contributors": [
+        {
+          "name": "Tapio",
+          "description": "Author"
+        }
+      ],
+      "dependencies": [
+        {
+          "id": "spongeapi",
+          "version": "8.1.0",
+          "load-order": "after",
+          "optional": false
+        }
+      ]
+    }
+  ]
+}
