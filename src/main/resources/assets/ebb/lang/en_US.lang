@@ -1,0 +1,3 @@
+config.ebb.inertia=Enable Inertia
+config.ebb.fuseTime=Fuse Time
+config.ebb.cd=Bombing Cool-down
