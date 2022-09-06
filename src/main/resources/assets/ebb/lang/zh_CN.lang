@@ -1,0 +1,3 @@
+config.ebb.inertia=启用惯性
+config.ebb.fuseTime=引线时间
+config.ebb.cd=轰炸冷却时间
