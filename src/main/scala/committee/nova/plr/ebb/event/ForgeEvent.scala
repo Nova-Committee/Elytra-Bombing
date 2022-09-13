@@ -1,6 +1,5 @@
 package committee.nova.plr.ebb.event
 
-import com.unascribed.backlytra.MethodImitations
 import committee.nova.plr.ebb.ElytraBombing
 import committee.nova.plr.ebb.config.CommonConfig
 import cpw.mods.fml.common.eventhandler.SubscribeEvent
@@ -13,11 +12,13 @@ import net.minecraftforge.event.entity.player.PlayerInteractEvent
 class ForgeEvent {
   @SubscribeEvent
   def onUseItem(e: PlayerInteractEvent): Unit = {
+    val check = ElytraBombing.elytraStatusCheck
+    if (check == null) return
     if (e.action != PlayerInteractEvent.Action.RIGHT_CLICK_AIR) return
     val player = e.entityPlayer
     val world = player.worldObj
     if (world.isRemote) return
-    if (!MethodImitations.isElytraFlying(player)) return
+    if (!check.apply(player)) return
     if (!Array(Items.flint_and_steel, Items.fire_charge).contains(player.getHeldItem.getItem)) return
     val tag = player.getEntityData
     tag.getInteger(ElytraBombing.MODID) match {

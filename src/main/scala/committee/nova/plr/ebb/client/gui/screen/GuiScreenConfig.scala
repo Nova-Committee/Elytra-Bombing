@@ -7,10 +7,10 @@ import net.minecraft.client.gui.GuiScreen
 import net.minecraftforge.common.config.{ConfigElement, Configuration}
 
 class GuiScreenConfig(parent: GuiScreen) extends GuiConfig(parent,
-    new ConfigElement(CommonConfig.config.getCategory(Configuration.CATEGORY_GENERAL)).getChildElements,
-    ElytraBombing.MODID,
-    ElytraBombing.MODID,
-    false,
-    false,
-    "ElytraBombing Config"
+  new ConfigElement(CommonConfig.config.getCategory(Configuration.CATEGORY_GENERAL)).getChildElements,
+  ElytraBombing.MODID,
+  ElytraBombing.MODID,
+  false,
+  false,
+  "ElytraBombing Config"
 )
