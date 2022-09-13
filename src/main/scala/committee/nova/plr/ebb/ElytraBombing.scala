@@ -15,7 +15,7 @@ import org.apache.logging.log4j.LogManager
 object ElytraBombing {
   final val MODID = "ebb"
   final val LOGGER = LogManager.getLogger(MODID)
-  var elytraStatusCheck: (EntityPlayer => Boolean) = _
+  var elytraStatusCheck: EntityPlayer => Boolean = _
 
   @EventHandler def preInit(e: FMLPreInitializationEvent): Unit = CommonConfig.init(e)
 

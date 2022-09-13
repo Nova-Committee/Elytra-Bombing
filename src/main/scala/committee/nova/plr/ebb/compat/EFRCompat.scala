@@ -6,14 +6,11 @@ import ganymedes01.etfuturum.api.elytra.IElytraPlayer
 object EFRCompat {
   def init(): Boolean = {
     try {
-      ElytraBombing.elytraStatusCheck = player => {
-        val elytraUser = player.asInstanceOf[IElytraPlayer]
-        elytraUser.etfu$isElytraFlying()
-      }
+      ElytraBombing.elytraStatusCheck = player => player.asInstanceOf[IElytraPlayer].etfu$isElytraFlying()
       ElytraBombing.LOGGER.info("Et Futurum Requiem interaction established!")
       true
     } catch {
-      case e: Exception =>
+      case _: Exception =>
         ElytraBombing.LOGGER.warn("Et Futurum Requiem loaded but elytra content not found either.")
         false
     }

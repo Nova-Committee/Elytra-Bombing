@@ -22,8 +22,7 @@ class ForgeEvent {
     if (!Array(Items.flint_and_steel, Items.fire_charge).contains(player.getHeldItem.getItem)) return
     val tag = player.getEntityData
     tag.getInteger(ElytraBombing.MODID) match {
-      case i if i > 0 => player.addChatMessage(new ChatComponentText(s"CD: $i tick(s)"))
-      case _ =>
+      case 0 =>
         if (!player.inventory.consumeInventoryItem(Item.getItemFromBlock(Blocks.tnt))) return
         val tnt = new EntityTNTPrimed(world, player.posX, player.posY, player.posZ, player)
         tnt.fuse = CommonConfig.fuseTime
@@ -32,6 +31,7 @@ class ForgeEvent {
         world.playSoundAtEntity(tnt, "game.tnt.primed", 1F, 1F)
         player.getHeldItem.damageItem(1, player)
         tag.setInteger(ElytraBombing.MODID, CommonConfig.cd)
+      case i if i > 0 => player.addChatMessage(new ChatComponentText(s"CD: $i tick(s)"))
     }
   }
 }

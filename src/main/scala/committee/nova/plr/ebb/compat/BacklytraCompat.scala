@@ -10,10 +10,9 @@ object BacklytraCompat {
       ElytraBombing.LOGGER.info("Backlytra interaction established!")
       true
     } catch {
-      case _: Exception => {
+      case _: Exception =>
         ElytraBombing.LOGGER.warn("Backlytra loaded but compatibility failed, checking the EFR one")
         false
-      }
     }
   }
 }
