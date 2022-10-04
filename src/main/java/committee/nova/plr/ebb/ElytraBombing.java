@@ -35,8 +35,7 @@ public class ElytraBombing implements ModInitializer {
         if (tnt == null || tnt.isEmpty()) return false;
         final var tntItem = tnt.getItem();
         if (player.getItemCooldownManager().isCoolingDown(tntItem)) {
-            final int cd = (int) (player.getItemCooldownManager().getCooldownProgress(tntItem, 0F) *
-                    CONFIG.cdTime);
+            final int cd = (int) (player.getItemCooldownManager().getCooldownProgress(tntItem, 0F) * CONFIG.cdTime);
             if (!player.world.isClient) player.sendMessage(Text.literal("CD: " + cd + " tick(s)"), false);
             return false;
         }
