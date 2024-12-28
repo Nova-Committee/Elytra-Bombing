@@ -2,17 +2,13 @@ package committee.nova.plr.elytraBombing.common.event;
 
 import committee.nova.plr.elytraBombing.common.tools.player.PlayerHandler;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Blocks;
-import net.minecraft.init.Items;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.text.TextComponentString;
-import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
-import java.text.MessageFormat;
+import java.util.function.Consumer;
+import java.util.function.Predicate;
 
 public class EventLoader {
     public EventLoader() {
@@ -22,34 +18,43 @@ public class EventLoader {
     @SubscribeEvent
     public void onPlayerRightClickItem(PlayerInteractEvent.RightClickItem event) {
         final EntityPlayer player = event.getEntityPlayer();
-        if (!player.isElytraFlying()) {
-            return;
-        }
-        final ItemStack stack = event.getItemStack();
-        if (stack.isEmpty()) {
-            return;
-        }
-        final Item igniter = stack.getItem();
-        if (!(igniter == Items.FLINT_AND_STEEL) && !(igniter == Items.FIRE_CHARGE)) {
-            return;
-        }
-        final ItemStack tnt = PlayerHandler.searchFor(player, new ItemStack(Blocks.TNT).getItem(), 0);
-        if (tnt.isEmpty()) {
-            return;
-        }
-        final Item tntItem = tnt.getItem();
-        if (player.getCooldownTracker().hasCooldown(tntItem)) {
-            final int cd = (int) (player.getCooldownTracker().getCooldown(tntItem, 0) * 60);
-            final boolean isPlural = cd > 1;
-            if (!player.world.isRemote) {
-                player.sendMessage(new TextComponentString(
-                        MessageFormat.format(new TextComponentTranslation("msg.ebb.cd").getFormattedText(),
-                                cd + "",
-                                isPlural ? new TextComponentTranslation("msg.ebb.unit.plural_suffix").getFormattedText() : "")
-                ));
+        EEBContext context=new EEBContext();
+        context.player=player;
+        //player is not null
+
+        if (player==null)return;
+        if (player.isSpectator())return;
+
+        boolean flag=false;
+        for (Predicate<EntityPlayer> predicate:EEBEvents.ACCESS_FLYING){
+            if(predicate.test(player)) {
+                flag=true;
+                break;
             }
+        }
+        if (!flag)return;
+        final ItemStack stackIgiter = event.getItemStack();
+        if (stackIgiter.isEmpty()) {
             return;
         }
-        PlayerHandler.launchTnt(player, stack, tnt);
+        for (Predicate<ItemStack> accessIngiter: EEBEvents.ACCESS_IGNITER.keySet()){
+            if (accessIngiter.test(stackIgiter)){
+                Consumer<EEBContext> consumer= EEBEvents.ACCESS_IGNITER.get(accessIngiter);
+                //igniter is not null
+                context.igniterStack=stackIgiter;
+                consumer.accept(context);
+                break;
+            }
+        }
+
+        if (context.igniterStack==null) return;
+
+        final Predicate<ItemStack> tnt = PlayerHandler.searchFor(context);
+        if (tnt==null) return;
+
+        Consumer<EEBContext> consumer=EEBEvents.ACCESS_TNT.get(tnt);
+        //tnt is not null
+        consumer.accept(context);
+
     }
 }
